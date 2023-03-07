@@ -1,5 +1,4 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $video_url = $_POST['video_url'];
 
@@ -11,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Download the thumbnail image to the server
     $thumbnail_file = "thumbnail.jpg";
-    file_put_contents($thumbnail_file, file_get_contents($thumbnail_url));
+    copy($thumbnail_url, $thumbnail_file);
 
     // Send the thumbnail image to the browser for download
     header('Content-Type: image/jpeg');
@@ -25,5 +24,4 @@ function get_video_id($url) {
     parse_str($parts['query'], $query);
     return $query['v'];
 }
-
 ?>
